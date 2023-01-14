@@ -1,0 +1,12 @@
+* {
+    background-color: beige;
+    color: navy;
+}
+
+h1, h2, h3 {
+    font-family: 'Forum', cursive;
+
+}
+p, button, Link {
+    font-family: 'Work Sans', sans-serif;
+}
