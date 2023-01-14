@@ -7,6 +7,7 @@ const Search = () => {
         setSearchInput(searchValue)}
     return (
         <div>
+            <h1>Find Your Password:</h1>
             <input
                 type="text"
                 placeholder="Search here"

@@ -14,12 +14,15 @@ const App = () => {
     return (
         <div>
             <Navbar />
-            <Routes>
-                <Route exact path="/" element={<LandingPage />}/>
-                <Route  exact path="/signup" element={<SignUp />}/>
-                <Route  exact path="/login" element={<Login />}/>
-                <Route  exact path="/mainpage" element={<Mainpage />}/>
-            </Routes>
+            <div className="main-content">
+                <Routes>
+                    <Route exact path="/" element={<LandingPage />}/>
+                    <Route  exact path="/signup" element={<SignUp />}/>
+                    <Route  exact path="/login" element={<Login />}/>
+                    <Route  exact path="/mainpage" element={<Mainpage />}/>
+                </Routes>
+
+            </div>
         </div>
     )
 }

@@ -1,13 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
-import Navbar from './Navbar';
 
 const LandingPage = () => {
     return (
         <div>
-            <h1>Welcome to Password Manager Page 1</h1>
-            <button><Link to="login">Login</Link></button>
-            <button><Link to="signup">Sign Up</Link></button>
+            <h1>Welcome to Password Manager</h1>
+            <div className="buttons">
+                <button className="login" ><Link style={{ color: "white", textDecoration: "none"}} to="login">Login</Link></button>
+                <button className="signup"><Link style={{ color: "white", textDecoration: "none"}}to="signup">Sign Up</Link></button>
+
+            </div>
         </div>
     )
 }

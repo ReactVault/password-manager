@@ -72,11 +72,11 @@ const SignUp = () => {
                     
                 />
                 </div>
-                <input type="submit" className="btn btn-primary" value="Signup" />
+                <input type="submit" className="submit" />
             </form>
-            <p className="my-1">
+            <p >
                 Already have an account? 
-                <button onClick={redirect}>Login</button>
+                <button className="login" onClick={redirect}>Login</button>
             </p>
         </div>
     )

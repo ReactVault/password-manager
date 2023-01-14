@@ -1,12 +1,79 @@
-* {
-    background-color: beige;
-    color: navy;
+body {
+    background-color: #ECEBE4;
+    color: #153B50;
+   
+}
+nav {
+    display: block;
+    width: 100%;
+    background: #153B50;
+    color: white;
 }
 
+.main-content {
+    display: absolute;
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: center;
+}
 h1, h2, h3 {
     font-family: 'Forum', cursive;
+    font-weight: bold;
+}
+h1 {
+    font-size: 5rem;
+    color: #6B2737;
+}
+h2 {
+    font-size: 4rem;
+    color: #4372A4;
 
 }
-p, button, Link {
+h3 {
+    font-size: 3rem;
+    color: #CC998D;
+}
+
+p, button, nav, input, table {
     font-family: 'Work Sans', sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+input {
+    display: block;
+    width: 100%;
+    margin: 1rem;
+}
+button {
+   display: block;
+   width: 100%;
+   margin: 1rem;
+   box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24);
+}
+.buttons {
+    display: block;
+    width: 100%;
+}
+
+.signup {
+    background-color: #9C6062;
+    color: white;
+}
+.signup:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.login {
+    background-color: #DCC2B9;
+    color: white;
+}
+.login:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.submit {
+    background-color: #4372A4;
+    color: white;
+}
+.submit:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }

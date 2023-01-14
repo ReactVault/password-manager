@@ -23,6 +23,7 @@ const Login = () => {
     return (
         <div>
             <h1 >Log in</h1>
+
             <p >Access your account
             </p>
             <form >
@@ -47,12 +48,12 @@ const Login = () => {
                     
                 />
                 </div>
-                <input type="submit"  value="Login" />
+                <input type="submit"  className="submit" />
             </form>
             <p >
                 Don't have an account? 
             </p>
-            <button onClick={redirect}>Sign Up</button>
+            <button className="signup"onClick={redirect}>Sign Up</button>
         </div>
     )
 }
