@@ -6,7 +6,8 @@ dbController.verifyUser = (req, res, next) => {
     
 };
 
-//returns all passwords for a given email from users table
+//returns all passwords for a given email listed on 'users' table
+    //'users' table already exists
 dbController.getPasswords = async (req, res, next) => {
     const {email} = req.query;
 
