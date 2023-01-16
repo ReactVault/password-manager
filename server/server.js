@@ -13,7 +13,7 @@ app.post('/', dbController.getPasswords, (req, res) => {
 
 app.post('/add', dbController.addPassword, (req, res) => {
   return res.status(200).json(res.locals.message);
-
+})
 //require routes
 const authRouter = require('./routes/authRoute');
 
@@ -49,7 +49,6 @@ app.post('/create', dbController.createUser, dbController.createUserTable, (req,
 app.use('/', authRouter);
 
 
-module.exports = app.listen(3000); //listens on port 3000 -> http://localhost:3000/seryt
 
 //Global error handling middleware
 app.use((err, req, res, next) => {
