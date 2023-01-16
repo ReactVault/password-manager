@@ -4,10 +4,9 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const db = require('../models/userModels');
 
-
 // const sessionConfig = {
 //     name: 'cookieName',
-//     secret: 'secretName' //usually store this in .env files so they dont push to github
+//     secret: 'secretName', //usually store this in .env files so they dont push to github
 //     cookie: {
 //         maxAge: 1000 * 60 * 60, //time span of cooke, 60 mins
 //         secure: false, //true is for http access/production
@@ -17,14 +16,7 @@ const db = require('../models/userModels');
 //     saveUnititialized: false //doesnt save cookie on browswer unless user is logged in
 // }
 
-
 // router.use(session(sessionConfig));
-
-router.get('/', (req, res) => {
-    console.log('Root Page');
-    res.send('Root Page')
-})
-
 
 //login
 
@@ -51,7 +43,7 @@ router.post('/login',
                 console.log('Error in POST /login', err)
               } 
 
-              //set the userAccount to be the array of the user account object
+              //set the userAccount to be the account object
               let userAccount = result.rows;
 
             //   check to see if the account exists
@@ -67,9 +59,8 @@ router.post('/login',
                     if (matches) {
                         console.log('Successful login, redirecting to homepage');
 
-                        //create a session
-                        // req.session.user = {
-                        //     email,
+                        // create a session
+                        // req.session.userAccount = {
                         //     userAccount[0]._id
                         // }
 
@@ -144,6 +135,9 @@ router.post('/signup',
                         console.log('Error inserting new user into db', err)
                     }
                     console.log('User successfully added', results); //not sure why results is undefined when added... 
+                    
+                    // res.cookie('cookieID', userAccount)
+                    
                     res.status(200).send('You have successfully created an account.').redirect("/login");
                   })
 
