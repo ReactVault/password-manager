@@ -11,7 +11,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // statically serve everything in the build folder on the route '/build'
+
 app.use('/dist', express.static(path.join(__dirname, '/dist')));
+
 // serve index.html on the route '/'
 app.get('/', (req, res) => {
     return res.status(200).sendFile(path.join(__dirname, '../index.html'));
@@ -22,6 +24,7 @@ app.get('/', (req, res) => {
 app.use('/', authRouter);
 
 
+module.exports = app.listen(3000); //listens on port 3000 -> http://localhost:3000/seryt
 
 //Global error handling middleware
 app.use((err, req, res, next) => {
