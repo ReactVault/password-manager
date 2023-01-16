@@ -1,14 +1,24 @@
 const express = require('express');
 const router = express.Router();
+// const session = require('express-session');
 const bcrypt = require('bcrypt');
 const db = require('../models/userModels');
-const session = require('express-session');
 
 
-// router.use(session ({
-//     secret: 'secret',
-//     resave: false
-// }))
+// const sessionConfig = {
+//     name: 'cookieName',
+//     secret: 'secretName' //usually store this in .env files so they dont push to github
+//     cookie: {
+//         maxAge: 1000 * 60 * 60, //time span of cooke, 60 mins
+//         secure: false, //true is for http access/production
+//         httpOnly: true, //no access from javascript
+//     },
+//     resave: false,
+//     saveUnititialized: false //doesnt save cookie on browswer unless user is logged in
+// }
+
+
+// router.use(session(sessionConfig));
 
 router.get('/', (req, res) => {
     console.log('Root Page');
@@ -25,9 +35,13 @@ router.get('/login', (req, res) => {
 
 router.post('/login', 
     (req, res) => {
-        console.log("Inside the POST /login");
 
         const { email, password } = req.body;
+
+        if (!email || !password) {
+            console.log('Enter missing field');
+            res.status(404).send('Enter missing field');
+        }
 
         if (email && password) {
             db.query(`SELECT * FROM users WHERE email = $1`,
@@ -46,19 +60,27 @@ router.post('/login',
                     if (err) {
                         console.log('Error comparing hash passwords', err)
                     } 
-                    if (matches) {
-                        console.log('Successful login, redirecting to homepage');
-                        res.redirect('home');
-                    }
                     if (!matches) {
                         console.log('Password incorrect');
-                        res.send('Password incorrect')
+                        res.status(404).send('Password incorrect');
+                    }
+                    if (matches) {
+                        console.log('Successful login, redirecting to homepage');
+
+                        //create a session
+                        // req.session.user = {
+                        //     email,
+                        //     userAccount[0]._id
+                        // }
+
+                        //redirect to home page
+                        res.status(200).redirect('/home');
                     }
                 })
               } 
               if (userAccount.length === 0) {
                 console.log('Account does not exist');
-                res.send('Account does not exist')
+                res.status(404).send('Account does not exist');
               }
             }
           )}
@@ -79,8 +101,6 @@ router.post('/signup',
         console.log("Inside the POST /signup");
         
         let { user_name, email, password, password2 } = req.body;
-
-        // console.log({ user_name, email, password, password2 });
         
         db.query('SELECT * FROM users', async (err, result) => {
             if (err) {
@@ -96,20 +116,20 @@ router.post('/signup',
             for (let i=0; i<userDB.length; i++) {
                 if (userDB[i].email === email) {
                     console.log('Email is already in use');
-                    res.send('Email is already in use');
+                    res.status(404).send('Email is already in use');
                 }
             }
 
             //if user misses one input during signup, log error
             if (!user_name || !email || !password || !password2) {
                 console.log('Please enter all fields');
-                res.send('Please enter all fields');
+                res.status(404).send('Please enter all fields');
             }
 
             //check if the passwords match, log error if they do not match
             if (password !== password2) {
                 console.log('Passwords do not match');
-                res.send('Passwords do not match');
+                res.status(404).send('Passwords do not match');
             }
             //inputs successfully pass all tests, create new user with hashed password using bcrypt
             else {
@@ -124,8 +144,7 @@ router.post('/signup',
                         console.log('Error inserting new user into db', err)
                     }
                     console.log('User successfully added', results); //not sure why results is undefined when added... 
-                    res.send('You have successfully created an account.');
-                    res.redirect("/login");
+                    res.status(200).send('You have successfully created an account.').redirect("/login");
                   })
 
                 //uncomment to run tests to see all the users in the database (make sure to comment the query insert above in order to not add in a user if using postman to test)
@@ -136,12 +155,10 @@ router.post('/signup',
                 //     }
                 //     console.log(results.rows);
                 //   })
-            
             }
         })
 
     });
-
 
 //logging out
 router.get('/logout', (req,res) => {
