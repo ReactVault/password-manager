@@ -61,9 +61,9 @@ const Search = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td className=" website" >Placeholder</td>
-                            <td className=" username" >Placeholder</td>
-                            <td className=" password" >Placeholder</td>
+                            <td className="website">Placeholder</td>
+                            <td className="username">Placeholder</td>
+                            <td className="password">Placeholder</td>
                         </tr>
                     </tbody>
                 </table>
