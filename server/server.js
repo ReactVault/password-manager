@@ -1,7 +1,18 @@
 const path = require('path');
 const express = require('express');
+const { count } = require('console');
 const app = express();
 const PORT = 3000;
+
+
+const dbController = require('./dbController');
+
+app.post('/', dbController.getPasswords, (req, res) => {
+    return res.status(200).json(res.locals.passwords);
+});
+
+app.post('/add', dbController.addPassword, (req, res) => {
+  return res.status(200).json(res.locals.message);
 
 //require routes
 const authRouter = require('./routes/authRoute');
@@ -17,8 +28,22 @@ app.use('/dist', express.static(path.join(__dirname, '/dist')));
 // serve index.html on the route '/'
 app.get('/', (req, res) => {
     return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+
 });
 
+app.delete('/', dbController.deletePassword, (req, res) => {
+  return res.status(200).json(res.locals.message);
+});
+
+app.patch('/', dbController.updatePassword, (req, res) => {
+  return res.status(200).json(res.locals.message);
+});
+
+
+app.post('/create', dbController.createUser, dbController.createUserTable, (req, res) => {
+    return res.status(200).json(res.locals.message);
+});
+  
 
 //define route handlers
 app.use('/', authRouter);
@@ -45,3 +70,4 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
+
