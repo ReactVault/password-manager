@@ -7,12 +7,13 @@ import LandingPage from './LandingPage.js'
 import Login from './Login.js';
 import SignUp from './SignUp.js';
 import Navbar from './Navbar';
-
+import img from '../images/vintagecomputers.jpeg'
 import '../styles/styles.css';
 
 const App = () => {
     return (
         <div>
+            <img className="computerImg"src={img}/>
             <Navbar />
             <div className="main-content">
                 <Routes>

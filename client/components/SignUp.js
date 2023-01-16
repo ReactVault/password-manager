@@ -76,7 +76,7 @@ const SignUp = () => {
             </form>
             <p >
                 Already have an account? 
-                <button className="login" onClick={redirect}>Login</button>
+                <button className="login redirect" onClick={redirect}>Login</button>
             </p>
         </div>
     )

@@ -53,7 +53,7 @@ const Login = () => {
             <p >
                 Don't have an account? 
             </p>
-            <button className="signup"onClick={redirect}>Sign Up</button>
+            <button className="signup redirect" onClick={redirect}>Sign Up</button>
         </div>
     )
 }

@@ -7,30 +7,33 @@ const Search = () => {
         setSearchInput(searchValue)}
     return (
         <div>
-            <h1>Find Your Password:</h1>
+            <h1>You're in!</h1>
+            <h2>Find your password:</h2>
             <input
                 type="text"
                 placeholder="Search here"
                 onChange={(e) => handleChange(e.target.value)}
                 />
             <section>
-            <h2>"Search Results"</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Password</th>
-                    </tr>
+                <h3 id="results">Results:</h3>
+                <table className="searchResults">
+                    <thead>
+                        <tr>
+                            <th>Website</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                        </tr>
 
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>fakeuser</td>
-                        <td>fakepassword</td>
-                    </tr>
-                </tbody>
-            </table>
-         </section>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td className="searchResults" id="website">Placeholder</td>
+                            <td className="searchResults" id="username">Placeholder</td>
+                            <td className="searchResults" id="username">Placeholder</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
         </div>
     )
 }

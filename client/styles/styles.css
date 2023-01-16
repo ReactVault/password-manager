@@ -1,4 +1,5 @@
 body {
+
     background-color: #ECEBE4;
     color: #153B50;
    
@@ -9,12 +10,21 @@ nav {
     background: #153B50;
     color: white;
 }
-
+/* .landingPage{
+    background-color:rgba(236, 235, 228, 0.7);
+    border: 0px;
+    padding: 0 1rem 0.5rem 1rem;
+    border-radius: 5px;
+} */
 .main-content {
     display: absolute;
     margin-left: 25%;
     margin-right: 25%;
     text-align: center;
+    background-color:rgba(236, 235, 228, 0.8);
+    border: 0px;
+    padding: 0 1rem 0.5rem 1rem;
+    border-radius: 20px;
 }
 h1, h2, h3 {
     font-family: 'Forum', cursive;
@@ -38,19 +48,42 @@ p, button, nav, input, table {
     font-family: 'Work Sans', sans-serif;
     font-size: 1.2rem;
     text-align: center;
+    margin-bottom: 0px;
 }
 
 input {
     display: block;
     width: 100%;
-    margin: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 20px;
 }
 button {
    display: block;
    width: 100%;
-   margin: 1rem;
+   margin-bottom: 1rem;
    box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24);
+   border-radius: 20px;
 }
+#results{
+    font-family: 'Work Sans', sans-serif;
+    font-size: 1.5rem;
+    color: #4372A4;
+    margin-bottom: 0px;
+}
+table {
+    display: block;
+    width: 100%;
+    border: 1px solid #153B50;
+    font-size: 1.5rem;
+    background-color: #ECEBE4;
+}
+th {
+    display: absolute;
+    width: 10%;
+    background-color: #6B2737;
+    color: white;
+}
+
 .buttons {
     display: block;
     width: 100%;
@@ -70,10 +103,26 @@ button {
 .login:hover{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
+.redirect {
+    margin-left: 25%;
+    margin-right: 25%;
+    width: 50%;
+    font-size: .8rem;
+}
 .submit {
     background-color: #4372A4;
     color: white;
+    border-radius: 20px;
 }
 .submit:hover{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.computerImg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+
 }
