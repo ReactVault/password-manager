@@ -10,7 +10,7 @@ const Navbar = () => {
             <Link style={{marginLeft:"5%", color: "white", textDecoration: "none"}} to="/">Landing Page</Link>
             <Link style={{marginLeft:"5%", color: "white", textDecoration: "none"}} to="/login">Login</Link>
             <Link style={{marginLeft:"5%", color: "white", textDecoration: "none"}} to="/signup">Sign Up</Link>
-            <Link style={{marginLeft:"5%", color: "white", textDecoration: "none"}} to="/mainpage">Mainpage</Link>
+            <Link style={{marginLeft:"5%", color: "white", textDecoration: "none"}} to="/search">Search</Link>
         </nav>
     )
 };

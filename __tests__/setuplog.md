@@ -63,3 +63,14 @@
     ```
     <br>
 1. installed `regenerator-runtime`, seen it in the testing unit, have not use it in this project, not sure what it does for now, 
+
+1. installed '@testing-library/jest-dom' using `npm install --save-dev @testing-library/jest-dom` for using handy custom jest matchers 
+
+1. installed '@testing-library/user-event' using `npm install --save-dev @testing-library/user-event` for userEvent (better version of fireEvent)
+
+1. need for `jest-environment-jsdom` with `npm i jest-environment-jsdom --save-dev` if jest >= 28
+   - in `jest.config.js` file, set `testEnvironment: "jsdom"`
+
+1. in `jest.config.js` file, set `verbose: true"`
+
+1. in `babel.config.js` file, add `"@babel/preset-react"` to presets
