@@ -20,11 +20,6 @@ const db = require('../models/userModels');
 
 //login
 
-// router.get('/login', (req, res) => {
-//     console.log('GET Login Page');
-//     res.json('GET Login Page')
-// })
-
 router.post('/login', 
     (req, res) => {
 
@@ -65,14 +60,14 @@ router.post('/login',
                         // }
 
                         //redirect to home page
-                        return res.status(200).json('You have successfully created an account.')
+                        return res.status(200).json('You have successfully logged in.')
                         //res.redirect('/mainpage') redirect never worked
                     }
                 })
               } 
               if (userAccount.length === 0) {
                 console.log('Account does not exist');
-                return res.status(404).json('Account does not exist');
+                return res.status(404).send('Account does not exist');
               }
             }
           )}
@@ -80,13 +75,6 @@ router.post('/login',
 
 
 //sign up
-
-// router.get('/signup', 
-//     (req,res) => {
-//         console.log("GET Signup Page");
-//         res.json('GET signup page')
-//     });
-
 
 router.post('/signup', 
     async (req, res) => {

@@ -34,10 +34,10 @@ const Login = () => {
       }
       
       useEffect(() => {
-        if (Object.hasOwn(login, 'username')) {
+        if (Object.hasOwn(login, 'email')) {
           setLoginInfo('Login Success!')
           setTimeout(() => {
-            navigate(`/${login.username}`, {state: {...login}});
+            navigate(`/${login.email}`, {state: {...login}});
           }, 1000);
         } else if (Object.hasOwn(login, 'err')) {
           setLoginInfo(`${login.err}`)

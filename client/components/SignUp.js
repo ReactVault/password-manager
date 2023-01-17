@@ -36,6 +36,9 @@ const SignUp = () => {
     .then((data) => {
         console.log(data);
         setCreated(data)
+        // if ()
+        // alert('Login successful!')
+        // return navigate('/login')
     })
 }
 
