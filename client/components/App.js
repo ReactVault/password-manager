@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes,  Route, } from 'react-router-dom';
 
 //import components
-import Mainpage from './Mainpage.js'
+import Search from './search.js'
 import LandingPage from './LandingPage.js'
 import Login from './Login.js';
 import SignUp from './SignUp.js';
@@ -24,7 +24,7 @@ const App = () => {
                     <Route exact path="/" element={<LandingPage />}/>
                     <Route  exact path="/signup" element={<SignUp />}/>
                     <Route  exact path="/login" element={<Login />}/>
-                    <Route  exact path="/mainpage" element={<Mainpage />}/>
+                    <Route  exact path="/search" element={<Search />}/>
                     <Route  exact path="/add" element={<AddPassword />}/>
                     <Route  exact path="/delete" element={<DeletePassword />}/>
                     <Route  exact path="/update" element={<UpdatePassword />}/>

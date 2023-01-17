@@ -20,11 +20,6 @@ const db = require('../models/userModels');
 
 //login
 
-router.get('/login', (req, res) => {
-    console.log('GET Login Page');
-    res.send('GET Login Page')
-})
-
 router.post('/login', 
     (req, res) => {
 
@@ -32,7 +27,7 @@ router.post('/login',
 
         if (!email || !password) {
             console.log('Enter missing field');
-            res.status(404).send('Enter missing field');
+            return res.status(404).json('Enter missing field');
         }
 
         if (email && password) {
@@ -54,7 +49,7 @@ router.post('/login',
                     } 
                     if (!matches) {
                         console.log('Password incorrect');
-                        res.status(404).send('Password incorrect');
+                        return res.status(404).json('Password incorrect');
                     }
                     if (matches) {
                         console.log('Successful login, redirecting to homepage');
@@ -65,13 +60,14 @@ router.post('/login',
                         // }
 
                         //redirect to home page
-                        res.status(200).redirect('/home');
+                        return res.status(200).json('You have successfully logged in.')
+                        //res.redirect('/mainpage') redirect never worked
                     }
                 })
               } 
               if (userAccount.length === 0) {
                 console.log('Account does not exist');
-                res.status(404).send('Account does not exist');
+                return res.status(404).send('Account does not exist');
               }
             }
           )}
@@ -80,17 +76,10 @@ router.post('/login',
 
 //sign up
 
-router.get('/signup', 
-    (req,res) => {
-        console.log("GET Signup Page");
-        res.send('GET signup page')
-    });
-
-
 router.post('/signup', 
     async (req, res) => {
         console.log("Inside the POST /signup");
-        
+
         let { user_name, email, password, password2 } = req.body;
         
         db.query('SELECT * FROM users', async (err, result) => {
@@ -107,27 +96,28 @@ router.post('/signup',
             for (let i=0; i<userDB.length; i++) {
                 if (userDB[i].email === email) {
                     console.log('Email is already in use');
-                    res.status(404).send('Email is already in use');
+                    return res.status(404).json('Email is already in use');
                 }
             }
 
             //if user misses one input during signup, log error
             if (!user_name || !email || !password || !password2) {
                 console.log('Please enter all fields');
-                res.status(404).send('Please enter all fields');
+                return res.status(404).json('Please enter all fields');
             }
 
-            //check if the passwords match, log error if they do not match
+            // check if the passwords match, log error if they do not match
             if (password !== password2) {
                 console.log('Passwords do not match');
-                res.status(404).send('Passwords do not match');
+                res.status(404).json('Passwords do not match');
             }
+
             //inputs successfully pass all tests, create new user with hashed password using bcrypt
             else {
                 const hashedPassword = await bcrypt.hash(password, 12);
                 console.log(hashedPassword);
 
-                db.query(`INSERT INTO users (user_name, email, password) 
+                db.query(`INSERT INTO users (username, email, password) 
                   VALUES ($1, $2, $3)`,
                   [user_name, email, hashedPassword],
                   (err, results) => {
@@ -138,10 +128,11 @@ router.post('/signup',
                     
                     // res.cookie('cookieID', userAccount)
                     
-                    res.status(200).send('You have successfully created an account.').redirect("/login");
+                    res.status(200).json('You have successfully created an account.')
+                    //res.redirect('/homepage') redirect never worked
                   })
 
-                //uncomment to run tests to see all the users in the database (make sure to comment the query insert above in order to not add in a user if using postman to test)
+                // uncomment to run tests to see all the users in the database (make sure to comment the query insert above in order to not add in a user if using postman to test)
                 // db.query(`SELECT * from users`,
                 //   (err, results) => {
                 //     if (err) {
@@ -155,10 +146,10 @@ router.post('/signup',
     });
 
 //logging out
-router.get('/logout', (req,res) => {
-    console.log('Logged out');
-    res.redirect("/login");
-});
+// router.get('/logout', (req,res) => {
+//     console.log('Logged out');
+//     res.redirect("/login");
+// });
 
 
 module.exports = router;
