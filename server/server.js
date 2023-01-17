@@ -23,11 +23,12 @@ app.use(express.urlencoded({ extended: false }));
 
 // statically serve everything in the build folder on the route '/build'
 
-app.use('/dist', express.static(path.join(__dirname, '/dist')));
+app.use('/client', express.static(path.join(__dirname, '../client')));
+app.use('/', express.static(path.join(__dirname, '../dist')));
 
 // serve index.html on the route '/'
 app.get('/', (req, res) => {
-    return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+    return res.status(200).sendFile(path.join(__dirname, '../dist/index.html'));
 
 });
 
@@ -64,9 +65,6 @@ app.use((err, req, res, next) => {
 
 
 //listens on port 3000 -> http://localhost:3000/server
-app.listen(PORT, () => {
+module.exports = app.listen(PORT, () => {
     console.log('Server listening on port: ', PORT);
 });
-
-module.exports = app;
-

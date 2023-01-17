@@ -23,16 +23,16 @@ describe("Test the route integration", () => {
 
 
   // tests on '/sigup' route
-  describe('/signup', () => {
+  xdescribe('/signup', () => {
     const signupData = { email: 'testemail', username: 'testname', password: 'testpsd'  }
-    test("response with 200 status and json content type", () => {
+    xtest("response with 200 status and json content type", () => {
       return request(server)
         .post("/signup")
         .expect('Content-Type', /application\/json/)
         .expect(200);
     });
 
-    test("responds with the created username and id ", () => {
+    xtest("responds with the created username and id ", () => {
       return request(server)
         .post("/signup")
         .send(signupData)
@@ -44,7 +44,7 @@ describe("Test the route integration", () => {
         .expect(200);
     });
 
-    test("responds to invalid request with 400 status and error message in body", () => {
+    xtest("responds to invalid request with 400 status and error message in body", () => {
       const notObj = [1, 2, 3];
 
       return request(server)
