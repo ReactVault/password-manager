@@ -14,11 +14,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // statically serve everything in the build folder on the route '/build'
-app.use('/dist', express.static(path.join(__dirname, '/dist')));
+app.use('/client', express.static(path.join(__dirname, '../client')));
+app.use('/', express.static(path.join(__dirname, '../dist')));
+
+//app.use('/dist', express.static(path.join(__dirname, '/dist')));
+
+
 
 // serve index.html on the route '/'
+// app.get('/', (req, res) => {
+//   return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+// });
 app.get('/', (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+  return res.status(200).sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 
@@ -31,7 +39,7 @@ app.post('/add', dbController.addPassword, (req, res) => {
   return res.status(200).json(res.locals.message);
 });
 
-app.post('/', dbController.getPasswords, (req, res) => {
+app.post('/passwords', dbController.getPasswords, (req, res) => {
   return res.status(200).json(res.locals.passwords);
 });
 
@@ -43,12 +51,8 @@ app.patch('/', dbController.updatePassword, (req, res) => {
   return res.status(200).json(res.locals.message);
 });
 
-
 //define route handler (for /)
 app.use('/login', authRouter);
-
-
-module.exports = app.listen(3000); //listens on port 3000 -> http://localhost:3000/seryt
 
 //Global error handling middleware
 app.use((err, req, res, next) => {

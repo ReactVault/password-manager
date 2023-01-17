@@ -6,31 +6,79 @@ import { useNavigate } from 'react-router-dom';
 const Search = () => {
     const navigate = useNavigate();
 
-    const [password, getPassword] = useState('');;
+    const [passwords, getPasswords] = useState('');
+    const [email, getEmail] = useState('');
+    const [website, getWebsite] = useState('');
+    const [user_name, getUser_Name] = useState('');
 
     useEffect(() => {
         console.log('useEffect ran');
 
         fetch ('/passwords', {
-            method: 'GET',
-            headers: {'Content-Type': 'application/json'}
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(
+            {
+                email: "fs@gmail.com"
+            })
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                //console.log(data);
+                getPasswords(data);
+            })
+            .catch((error) => console.log(error));
+        }, []) 
+
+    // const displayPasswords = []
+    // if (passwords) {
+    //     passwords.forEach(([password]) => {
+    //         console.log('password id', password._id)
+    //         console.log('password', password)
+    //          displayPlants.push(<PlantInfo key={plant._id} plant={plant} />)
+    //     })
+        
+    // }
+
+    const updatePassword = () => {
+        console.log('inside updatePassword');
+
+        fetch ('/', {
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(
+            {
+                email: "fs@gmail.com",
+                website: "twitter.com",
+                password: "newPASSWORD"
+            })
         })
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
-                getPassword(data);
+                getPasswords(data);
             })
-            .catch((error) => console.log("ERROR"));
-        }, []) 
+            .catch((error) => console.log(error));
+    }
+
+    
 
     const displayPasswords = []
     if (passwords) {
-        passwords.forEach(([password]) => {
-            console.log('password id', password._id)
-            console.log('password', password)
-             displayPlants.push(<PlantInfo key={plant._id} plant={plant} />)
+        passwords.forEach((password) => {
+            // console.log(‘password id’, password._id) 
+            // console.log(‘password’, password)
+            displayPasswords.push(
+            <tr className="passwords" website = {password.website} email = {password.email}>
+                <td><strong>Email: </strong>{password.email}</td>
+                <td><strong>Username: </strong>{password.user_name}</td>
+                <td><strong>Password: </strong>{password.password}</td>
+                <td><strong>Website: </strong>{password.website}</td>
+                <button className="deletePassword" website={password.website} email={password.email} onClick={() => buttonPress('/delete')}>Delete</button>
+                <button className="updatePassword" onClick={() => buttonPress('/update')}>Update </button>
+            </tr>
+            )
         })
-        
     }
 
 
@@ -52,24 +100,20 @@ const Search = () => {
                 <h3 id="results">Results:</h3>
                 <table className="searchResults">
                     <thead>
-                        <tr>
-                            <th>Website</th>
-                            <th>Username</th>
-                            <th>Password</th>
-                        </tr>
+                        {displayPasswords}
 
                     </thead>
-                    <tbody>
+                    {/* <tbody>
                         <tr>
                             <td className="website">Placeholder</td>
                             <td className="username">Placeholder</td>
                             <td className="password">Placeholder</td>
                         </tr>
-                    </tbody>
+                    </tbody> */}
                 </table>
                 <button className="addPassword" onClick={() => buttonPress('/add')}>Add new password</button>
-                <button className="updatePassword" onClick={() => buttonPress('/update')}>Update password</button>
-                <button className="deletePassword" onClick={() => buttonPress('/delete')}>Delete password</button>
+                {/* <button className="updatePassword" onClick={() => buttonPress('/update')}>Update password</button>
+                <button className="deletePassword" onClick={() => buttonPress('/delete')}>Delete password</button> */}
 
             </section>
         </div>

@@ -9,14 +9,16 @@ dbController.verifyUser = (req, res, next) => {
 //returns all passwords for a given email listed on 'users' table
     //'users' table already exists
 dbController.getPasswords = async (req, res, next) => {
-    const {email} = req.query;
+    const {email} = req.body;
+    console.log(email)
 
     try{
         const text = `SELECT website, user_name, email, password FROM "${email}"`;
 
         const params = [email];
         const result = await db.query(text /*,[params]*/);
-        res.locals.passwords = result.rows[0];
+        console.log(result.rows)
+        res.locals.passwords = result.rows;
         next();
     }
     catch (err) {
@@ -105,8 +107,8 @@ dbController.addPassword = async (req, res, next) => {
 
 //delete a specified row in a individual users password table
 dbController.deletePassword = async (req, res, next) => {
-    const website = req.query.website;
-    const email = req.query.email;
+    const website = req.body.website;
+    const email = req.body.email;
 
     //delete row in the users password Table
     const text = `DELETE FROM "${email}"
