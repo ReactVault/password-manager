@@ -9,7 +9,7 @@ import SignUp from './SignUp.js';
 import Navbar from './Navbar';
 import AddPassword from './AddPassword.js';
 import UpdatePassword from './UpdatePassword.js';
-import Delete from './DeletePassword.js'
+import DeletePassword from './DeletePassword.js'
 // import img from '../images/vintagecomputers.jpeg'
 
 import '../styles/styles.css';
@@ -26,7 +26,7 @@ const App = () => {
                     <Route  exact path="/login" element={<Login />}/>
                     <Route  exact path="/mainpage" element={<Mainpage />}/>
                     <Route  exact path="/add" element={<AddPassword />}/>
-                    <Route  exact path="/delete" element={<Delete />}/>
+                    <Route  exact path="/delete" element={<DeletePassword />}/>
                     <Route  exact path="/update" element={<UpdatePassword />}/>
                 </Routes>
 

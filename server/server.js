@@ -43,7 +43,7 @@ app.post('/passwords', dbController.getPasswords, (req, res) => {
   return res.status(200).json(res.locals.passwords);
 });
 
-app.delete('/', dbController.deletePassword, (req, res) => {
+app.delete('/delete', dbController.deletePassword, (req, res) => {
   return res.status(200).json(res.locals.message);
 });
 

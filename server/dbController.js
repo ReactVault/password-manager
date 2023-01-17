@@ -109,6 +109,7 @@ dbController.addPassword = async (req, res, next) => {
 dbController.deletePassword = async (req, res, next) => {
     const website = req.body.website;
     const email = req.body.email;
+    console.log(req.body);
 
     //delete row in the users password Table
     const text = `DELETE FROM "${email}"
