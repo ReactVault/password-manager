@@ -47,8 +47,7 @@ app.post('/create', dbController.createUser, dbController.createUserTable, (req,
   
 
 //define route handlers
-app.use('/', authRouter);
-
+app.use('/user', authRouter);
 
 
 //Global error handling middleware
