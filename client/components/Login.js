@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -6,15 +6,44 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-    });
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [loginInfo, setLoginInfo] = useState();
+    const [login, setLogin] = useState({});
 
-    //destructure
-    const {  email, password } = formData; 
-    
-    const handleChange = (e)=> setFormData({ ...formData, [e.target.name]:e.target.value })
+    const verifyUser = async (e) => {
+        console.log('login clicked');
+
+        e.preventDefault();
+
+        await fetch('../user/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            'email': email,
+            'password': password
+          }),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            setLogin(data);
+        })
+      }
+      
+      useEffect(() => {
+        if (Object.hasOwn(login, 'username')) {
+          setLoginInfo('Login Success!')
+          setTimeout(() => {
+            navigate(`/${login.username}`, {state: {...login}});
+          }, 1000);
+        } else if (Object.hasOwn(login, 'err')) {
+          setLoginInfo(`${login.err}`)
+        }
+      })
+
 
     const redirect = () => {
         navigate('/signup')
@@ -26,14 +55,14 @@ const Login = () => {
 
             <p >Access your account
             </p>
-            <form >
+            <form  onSubmit={verifyUser}>
                 <div >
                 <input
                     type="email"
                     placeholder="Email Address"
                     name="email"
                     value = {email}
-                    onChange={(e) => handleChange(e)}
+                    onChange={(e) => setEmail(e.target.value)}
                    
                 />
 
@@ -44,12 +73,14 @@ const Login = () => {
                     placeholder="Password"
                     name="password"
                     value={password}
-                    onChange={(e) => handleChange(e)}
+                    onChange={(e) => setPassword(e.target.value)}
                     
                 />
                 </div>
                 <input type="submit"  className="submit" />
             </form>
+            <p>{loginInfo}</p>
+
             <p >
                 Don't have an account? 
             </p>
